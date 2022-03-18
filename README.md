@@ -5,14 +5,19 @@ The User authentication is handled using JWT tokens.
 
 [Please find the client application(submodule) here](https://github.com/sameerad2001/JWT_Auth_Client)
 
+Sections : 
+1. Demo 
+2. Code explanation (How the application works)
+3. To-do list
+
 <br>
 
 ### Demo
 
 <img src = "https://github.com/sameerad2001/JWT_Auth_Server/blob/master/img/jwt.gif" alt = "Website Demo"/>
+<img src = "https://github.com/sameerad2001/JWT_Auth_Server/blob/master/img/jwt3.jpg" alt = "Website Demo"/>
 <img src = "https://github.com/sameerad2001/JWT_Auth_Server/blob/master/img/jwt1.jpg" alt = "Website Demo"/>
 <img src = "https://github.com/sameerad2001/JWT_Auth_Server/blob/master/img/jwt2.jpg" alt = "Website Demo"/>
-<img src = "https://github.com/sameerad2001/JWT_Auth_Server/blob/master/img/jwt3.jpg" alt = "Website Demo"/>
 
 ### How are the HTTP only cookies being set (Cross Domain)?
 1. The express server (hosted on a different domain) generates an access token and a refresh token and sends this as **json data** inside the **body** of the response (This is done because we can't send cookies between 2 different domains)
@@ -123,7 +128,7 @@ else
 ```
 
 ### To-do
-- [ ] Edit Secrets
+- [ ] Edit the secret messages
 - [ ] Refresh access token when it expires
 
 <hr>
