@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const secretMessageSchema = new Schema({
     userID: String,
+    title: String,
     message: String
 })
 

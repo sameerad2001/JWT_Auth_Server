@@ -66,7 +66,8 @@ module.exports = (app) => {
                                 if (refreshError)
                                     res.status(500).send(refreshError)
                                 else
-                                    res.status(200).json({ accessToken, refreshToken: savedRefreshToken.token })
+                                    res.status(200)
+                                        .json({ accessToken, refreshToken: savedRefreshToken.token })
                             })
                         }
                     })
@@ -108,7 +109,8 @@ module.exports = (app) => {
                             if (refreshError)
                                 res.status(500).send(refreshError)
                             else
-                                res.status(200).json({ accessToken, refreshToken: savedRefreshToken.token })
+                                res.status(200)
+                                    .json({ accessToken, refreshToken: savedRefreshToken.token })
                         })
                     }
                     else
@@ -162,6 +164,7 @@ module.exports = (app) => {
 
     app.delete("/logout", (req, res) => {
         let refreshToken = req.body.refreshToken
+        // console.log(refreshToken)
 
         if (!refreshToken)
             res.status(401).send("refresh token not provided")
@@ -174,5 +177,15 @@ module.exports = (app) => {
 
                 res.status(204).send("logout successful")
             })
+    })
+
+    app.post("/test_cookies", (req, res) => {
+        const authHeader = req.headers["authorization"]
+
+        // ____ <split> because our auth header is like : <BEARER TOKEN> ___________________________________
+        // We want the token so after splitting we take the element in the first index
+        const accessToken = authHeader && authHeader.split(' ')[1]
+
+        console.log(accessToken)
     })
 }

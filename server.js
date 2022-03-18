@@ -3,6 +3,8 @@ const bodyParser = require("body-parser")
 require("dotenv").config()
 const mongoose = require("mongoose");
 const cors = require("cors")
+const cookieParser = require('cookie-parser')
+
 
 const app = express()
 
@@ -16,6 +18,7 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(cookieParser())
 
 // Connect to mongoDB
 mongoose.connect('mongodb://localhost:27017/testDailyScheduleDB', { useNewUrlParser: true });

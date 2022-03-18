@@ -11,15 +11,14 @@ module.exports = (app) => {
     // Create a new message
     app.post("/secret_message", authenticateToken, (req, res) => {
         const userID = req.user.userID
-        const message = req.body.message
 
-        if (!message)
+        if (!req.body.message)
             res.status(404).send("message was not provided")
 
         else {
             let newMessage = new SecretMessage({
                 userID,
-                message
+                ...req.body
             })
 
             newMessage.save((err) => {
@@ -39,8 +38,33 @@ module.exports = (app) => {
             if (err)
                 res.status(500).send(err)
 
-            else
+            else {
+                // console.log(secrets)
                 res.status(200).send(secrets)
+            }
+        })
+    })
+
+    app.delete("/secret_message/:id", authenticateToken, (req, res) => {
+        const userID = req.user.userID
+
+        SecretMessage.deleteOne({ userID, _id: req.params.id }, (err) => {
+            if (err)
+                res.status(500).send(err)
+
+            else
+                res.status(200).send("Secret sent to the shadow realm!")
+        })
+    })
+
+    app.get("/secret_message/get_single_secret/:id", authenticateToken, (req, res) => {
+        const userID = req.user.userID
+
+        SecretMessage.findOne({ userID, _id: req.params.id }, (err, secret) => {
+            if (err)
+                res.status(500).send(err)
+            else
+                res.status(200).json(secret)
         })
     })
 
